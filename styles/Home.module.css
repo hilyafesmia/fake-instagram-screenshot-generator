@@ -1,10 +1,103 @@
+#chatbox {
+  border: 1px solid silver;
+  border-radius: 4rem;
+  display: flex;
+  flex-grow: 1;
+  padding: 1rem;
+  order: 0;
+}
+
+#closeFriend {
+  background-color: #7fdb6a;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#footer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 1rem;
+  width:fill;
+}
+
+#likeButton {
+  display: flex;
+  flex-grow: 0;
+  order: 1;
+}
+
+.profileInfo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+#screenshotResult {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  height: 1000px;
+  justify-content: space-between;
+  width: 450px;
+}
+
+#storyImg {
+  border-radius: 1rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#storyHeader {
+  align-items: center;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0));
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  padding-bottom: 1rem;
+  width: fill;
+
+}
+
+#storyContent {
+  background-color: black;
+  border-radius: 1rem;
+  display: block;
+  width: 450px;
+  height: 800px;
+  position: relative;
+  color: white;
+}
+
 .main {
   display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
-  min-height: 100vh;
+  min-height: 100vh; */
 }
 
 .description {
