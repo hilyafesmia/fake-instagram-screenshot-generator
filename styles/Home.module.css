@@ -3,7 +3,7 @@
   border-radius: 4rem;
   display: flex;
   flex-grow: 1;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   order: 0;
 }
 
@@ -42,7 +42,6 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  padding: 1rem;
 }
 
 #screenshotResult {
@@ -55,6 +54,30 @@
   width: 450px;
 }
 
+.storyBar {
+  background-color: rgba(255,255,255,0.25);
+  border-radius: 1rem;
+  height: 0.25rem;
+  width: auto;
+  flex-grow: 1;
+}
+
+.storyBarActive {
+  background-color: rgba(255,255,255);
+  border-radius: 1rem;
+  height: 0.25rem;
+  width: auto;
+  flex-grow: 1;
+}
+
+#storyCount {
+  align-content: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  padding-bottom: 1rem;
+}
+
 #storyImg {
   border-radius: 1rem;
   position: absolute;
@@ -62,19 +85,21 @@
   top: 0;
 }
 
-#storyHeader {
+#accountDetails {
   align-items: center;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0));
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+#storyHeader {
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0));
   position: absolute;
   z-index: 10;
   top: 0;
   left: 0;
-  padding-bottom: 1rem;
+  padding: 1rem;
   width: fill;
-
 }
 
 #storyContent {

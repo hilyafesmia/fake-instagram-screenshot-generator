@@ -4,6 +4,10 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { toPng } from 'html-to-image';
 
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 import { 
   Accordion, AccordionDetails, AccordionSummary, Avatar, 
   Box, Button, 
@@ -21,11 +25,13 @@ import React, { useCallback, useEffect, useRef } from 'react';
 export default function Home() {
 
   const [username, setUsername] = React.useState("example");
-  const [storyImg, setStoryImg] = React.useState("https://images.unsplash.com/photo-1626288215937-747af7be5b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fDklM0ExNnxlbnwwfHwwfHw%3D&w=1000&q=80");
+  const [storyImg, setStoryImg] = React.useState("https://images.unsplash.com/photo-1604311795833-25e1d5c128c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8OSUzQTE2fGVufDB8fDB8fA%3D%3D&w=1000&q=80");
   const [profilePicture, setProfilePicture] = React.useState("public/profilepicture.jpeg");
   const [time, setTime] = React.useState(5);
   const [timestamp, setTimestamp] = React.useState("");
   const [timeUnit, setTimeUnit] = React.useState("h");
+  const [storyCount, setStoryCount] = React.useState(2);
+  const [storyBar, setStoryBar] = React.useState([]);
   const [isCloseFriend, setIsCloseFriend] = React.useState(false);
 
   const imgRef = useRef(null)
@@ -61,9 +67,11 @@ export default function Home() {
 
   useEffect (() => {
     generateTimestamp();
-    console.log("update index")
-    console.log("ref", imgRef.current)
-  })
+    generateStoryCounter();
+
+    // console.log("update index")
+    // console.log("ref", imgRef.current)
+  }, []);
 
   const handleProfilePicture = (e) => {
     const fileReader = new FileReader();
@@ -93,9 +101,29 @@ export default function Home() {
     generateTimestamp();
   }
 
+  const handleStoryCount = (e) => {
+    setStoryCount(e.target.value);
+    generateStoryCounter(storyCount);
+  }
+
+  const generateStoryCounter = () => {
+    let storyBarArr = [];
+    for (let i = 0; i < storyCount; i++) {
+      if (i == 0) {
+        storyBarArr.push(<div className={styles.storyBarActive}></div>)
+      } else {
+        storyBarArr.push(<div className={styles.storyBar}></div>)
+      }
+    }
+    setStoryBar(storyBarArr);
+    console.log('stories', storyBar)
+  }
+
+
   const generateTimestamp = () => {
     const timestamp = time + timeUnit
     setTimestamp(timestamp);
+    console.log('timestamp', timestamp)
   }
 
   return (
@@ -152,6 +180,14 @@ export default function Home() {
               <Typography variant='h5' component='h2'>Additional Config</Typography>
             </AccordionSummary>
             <AccordionDetails>
+              <TextField 
+                  required
+                  defaultValue={storyCount} 
+                  label="Number of Stories" 
+                  type="number" 
+                  variant="outlined" 
+                  onMouseOut={handleStoryCount}
+              />
               <Typography color="rgba(0, 0, 0, 0.6)" variant="body1">
                 Timestamp
               </Typography>
@@ -200,15 +236,20 @@ export default function Home() {
           <div id={styles.storyContent}>
             <img id={styles.storyImg} src={storyImg} width={450} height={800}/>
             <div id={styles.storyHeader}>
-              <div className={styles.profileInfo}>  
-                <Avatar src={profilePicture} />
-                <Typography>{username}</Typography>
-                <Typography>{timestamp}</Typography>
+              <div id={styles.storyCount}>
+                {storyBar}
               </div>
-              <div className={styles.profileInfo}>  
-                { isCloseFriend && <CloseFriend/>}
-                <Icon fontSize='small'>more_horiz</Icon>
-                <Icon fontSize='large'>close</Icon>
+              <div id={styles.accountDetails}>
+                <div className={styles.profileInfo}>  
+                  <Avatar src={profilePicture} />
+                  <Typography sx={{fontWeight: '500'}}>{username}</Typography>
+                  <Typography>{timestamp}</Typography>
+                </div>
+                <div className={styles.profileInfo}>  
+                  { isCloseFriend && <CloseFriend/>}
+                  <MoreHorizIcon fontSize="large"></MoreHorizIcon>
+                  <CloseRoundedIcon style={{fontSize: "3rem"}}></CloseRoundedIcon>
+                </div>
               </div>
             </div>
           </div>  
@@ -224,7 +265,7 @@ export default function Home() {
             <div id={styles.chatbox}>
               <Typography color="white">Send Message</Typography>
             </div>
-            <Icon id={styles.likeButton} sx={{ color: 'white', fontSize: 40 }}>favorite_border</Icon>
+            <FavoriteBorderIcon fontSize="large" style={{ color: "white" }}></FavoriteBorderIcon>
           </div>
         </div>
         </div>
